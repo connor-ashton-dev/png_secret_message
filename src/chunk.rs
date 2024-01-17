@@ -37,7 +37,7 @@ impl Chunk {
     }
 
     /// Chunk data
-    fn get_data(&self) -> &[u8] {
+    pub fn get_data(&self) -> &[u8] {
         &self.data
     }
 
