@@ -1,31 +1,33 @@
 use std::{fmt::Display, str::FromStr};
 
+use crate::Error;
+
 #[derive(PartialEq, Debug)]
-struct ChunkType {
+pub struct ChunkType {
     content: [u8; 4],
 }
 
 impl ChunkType {
-    fn bytes(&self) -> [u8; 4] {
+    pub fn bytes(&self) -> [u8; 4] {
         self.content
     }
-    fn is_critical(&self) -> bool {
+    pub fn is_critical(&self) -> bool {
         self.content[0].is_ascii_uppercase()
     }
 
-    fn is_public(&self) -> bool {
+    pub fn is_public(&self) -> bool {
         self.content[1].is_ascii_uppercase()
     }
 
-    fn is_reserved_bit_valid(&self) -> bool {
+    pub fn is_reserved_bit_valid(&self) -> bool {
         self.content[2].is_ascii_uppercase()
     }
 
-    fn is_safe_to_copy(&self) -> bool {
-        !self.content[3].is_ascii_uppercase()
+    pub fn is_safe_to_copy(&self) -> bool {
+        self.content[3].is_ascii_lowercase()
     }
 
-    fn is_valid(&self) -> bool {
+    pub fn is_valid(&self) -> bool {
         // check reserved bit
         if !self.is_reserved_bit_valid() {
             return false;
@@ -36,13 +38,13 @@ impl ChunkType {
 
 impl Display for ChunkType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        let s = self.content.iter().map(|c| *c as char).collect::<String>();
+        let s = std::str::from_utf8(&self.content).unwrap();
         write!(f, "{s}")
     }
 }
 
 impl FromStr for ChunkType {
-    type Err = String;
+    type Err = Error;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         let mut bytes = [0u8; 4];
@@ -51,13 +53,13 @@ impl FromStr for ChunkType {
         if chars.len() == 4 {
             for (i, &char) in chars.iter().enumerate() {
                 if char.is_ascii_digit() {
-                    return Err("Can't have numeric chars".to_string());
+                    return Err("Can't have numeric chars".into());
                 };
                 bytes[i] = char as u8;
             }
             Ok(ChunkType { content: bytes })
         } else {
-            Err("Invalid string".to_string())
+            Err("Invalid string".into())
         }
     }
 }
