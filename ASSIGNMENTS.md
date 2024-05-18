@@ -2,11 +2,11 @@
 Here I will list everything I need to do for each part of the project
 
 ## 1. Chunk Types
-- [x] Write a `ChunkType` struct with my implementation of PNG chunk types  
-- [x] Implement a `TryFrom<[u8; 4]>` for my `ChunkType`
-- [x] Implement a `FromStr` for my `ChunkType`
-- [x] Implement `Display` for my `ChunkType`
-- [x] Implement or derive `PartialEq` and `Eq` for my `ChunkType`
+- [x] Write a `ChunkType` struct 
+- [x] Implement a `TryFrom<[u8; 4]>` for the `ChunkType`
+- [x] Implement a `FromStr` for the `ChunkType`
+- [x] Implement `Display` for the `ChunkType`
+- [x] Implement or derive `PartialEq` and `Eq` for the `ChunkType`
 ##### Required methods
 - [x] `fn bytes(&self) -> [u8; 4]`
 - [x] `fn is_valid(&self) -> bool`
@@ -17,9 +17,9 @@ Here I will list everything I need to do for each part of the project
 
 
 ## 2. Chunks
-- [x] Write a `Chunk` struct with your implementation of PNG chunks.
-- [x] Implement `TryFrom<&[u8]>` for your Chunk.
-- [x] Implement `Display` for your Chunk.
+- [x] Write a `Chunk` struct 
+- [x] Implement `TryFrom<&[u8]>` for the Chunk.
+- [x] Implement `Display` for the Chunk.
 ##### Required methods:
 - [x] `fn new(chunk_type: ChunkType, data: Vec<u8>) -> Chun`k
 - [x] `fn length(&self) -> u32`
@@ -30,10 +30,10 @@ Here I will list everything I need to do for each part of the project
 - [x] `fn as_bytes(&self) -> Vec<u8>`
 
 ## 3. PNG
-- [x] Write a Png struct with your implementation of PNG files.
-- [x] In your impl block, add a public constant called `STANDARD_HEADER` that has the 8 standard header bytes.
-- [x] Implement `TryFrom<&[u8]>` for your Png.
-- [x] Implement `Display` for your Png.
+- [x] Write a Png struct 
+- [x] In the impl block, add a public constant called `STANDARD_HEADER` that has the 8 standard header bytes.
+- [x] Implement `TryFrom<&[u8]>` for the Png.
+- [x] Implement `Display` for the Png.
 ##### Required methods:
 - [x] `fn from_chunks(chunks: Vec<Chunk>) -> Png`
 - [x] `fn append_chunk(&mut self, chunk: Chunk)`
