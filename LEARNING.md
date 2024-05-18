@@ -44,17 +44,17 @@ Here I will be taking notes about everything I've learned when making this proje
     - Ancillary bit: bit 5 of first byte
         - 0 (uppercase) = critical, 1 (lowercase) = ancillary
         - These are neccessary to display the file
-            - In our case, our secret chunks are not so we will be using lowercase probably
+            - In our case, our secret chunks are not for displaying the file so we will be using the lowercase option
     - Private bit: bit 5 of second byte
         - 0 (uppercase) = public, 1 (lowercase) = private
         - These are custom-defined, not part of the official PNG specification.
-            - Again, we will be using these ones in our secret messages
+            - Our chunks are custom-defined so we will be using the lowercase option
     - Reserved bit: bit 5 of third byte
         - Must be 0 (uppercase)
     - Safe-to-copy bit: bit 5 of fourth byte
         - 0 (uppercase) = unsafe to copy, 1 (lowercase) = safe to copy
         - This means that if we make edits to the file or do anything with an editor, it will be copied even if the editor doesn't recognize it
-            - We will be doing this so that our secret messages persist when the file is changed
+            - We will be using the lowercase option so that our secret messages persist when the file is changed
 
 ```
 For example, the hypothetical chunk type name bLOb has the property bits:  
