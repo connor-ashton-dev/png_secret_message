@@ -43,21 +43,29 @@ Here I will be taking notes about everything I've learned when making this proje
 - Semantics of property bits
     - Ancillary bit: bit 5 of first byte
         - 0 (uppercase) = critical, 1 (lowercase) = ancillary
+        - These are neccessary to display the file
+            - In our case, our secret chunks are not so we will be using lowercase probably
     - Private bit: bit 5 of second byte
         - 0 (uppercase) = public, 1 (lowercase) = private
+        - These are custom-defined, not part of the official PNG specification.
+            - Again, we will be using these ones in our secret messages
     - Reserved bit: bit 5 of third byte
         - Must be 0 (uppercase)
     - Safe-to-copy bit: bit 5 of fourth byte
         - 0 (uppercase) = unsafe to copy, 1 (lowercase) = safe to copy
+        - This means that if we make edits to the file or do anything with an editor, it will be copied even if the editor doesn't recognize it
+            - We will be doing this so that our secret messages persist when the file is changed
 
-For example, the hypothetical chunk type name bLOb has the property bits:
+```
+For example, the hypothetical chunk type name bLOb has the property bits:  
 
-   bLOb  <-- 32 bit chunk type code represented in text form
-   ||||
-   |||+- Safe-to-copy bit is 1 (lowercase letter; bit 5 is 1)
-   ||+-- Reserved bit is 0     (uppercase letter; bit 5 is 0)
-   |+--- Private bit is 0      (uppercase letter; bit 5 is 0)
-   +---- Ancillary bit is 1    (lowercase letter; bit 5 is 1)
+   bLOb  <-- 32 bit chunk type code represented in text form  
+   ||||  
+   |||+- Safe-to-copy bit is 1 (lowercase letter; bit 5 is 1)  
+   ||+-- Reserved bit is 0     (uppercase letter; bit 5 is 0)  
+   |+--- Private bit is 0      (uppercase letter; bit 5 is 0)  
+   +---- Ancillary bit is 1    (lowercase letter; bit 5 is 1)  
+```
 
 
 ## PNG File Structure
